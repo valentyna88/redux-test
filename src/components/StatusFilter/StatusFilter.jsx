@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 const StatusFilter = () => {
   // 2. Отримуємо значення фільтра із стану Redux
   const filter = useSelector(state => state.filters.status);
+
   return (
     <div className={css.wrapper}>
       <Button selected={filter === 'all'}>All</Button>
