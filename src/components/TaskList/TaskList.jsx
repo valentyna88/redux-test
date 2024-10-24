@@ -25,14 +25,13 @@ const TaskList = () => {
 
   // 4. Обчислюємо масив завдань, які необхідно відображати в інтерфейсі
   const visibleTasks = getVisibleTasks(tasks, statusFilter);
-
   return (
     <ul className={css.list}>
-      {visibleTasks.map(task => {
+      {visibleTasks.map(task => (
         <li className={css.listItem} key={task.id}>
           <Task task={task} />
-        </li>;
-      })}
+        </li>
+      ))}
     </ul>
   );
 };
