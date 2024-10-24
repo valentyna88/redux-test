@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// 1. Оголошуєм початкове значення стану Redux
+// // 1. Оголошуєм початкове значення стану Redux
 const initialState = {
   tasks: {
     items: [
@@ -15,10 +15,26 @@ const initialState = {
     status: 'all',
   },
 };
-
-// 2. Передаємо початкове значення стану Redux
+// // Використовуємо initialState як значення стану за умовчанням
 const rootReducer = (state = initialState, action) => {
-  return state;
+  // Редюсер розрізняє екшени за значенням властивості type
+  switch (action.type) {
+    // Залежно від типу екшену виконуватиметься різна логіка
+    case 'tasks/addTask': {
+      // Потрібно повернути копію об'єкту поточного стану
+      // в якому є всі дані існуючого стану
+      return {
+        ...state,
+        tasks: {
+          // та новий масив задач в якому є всі існуючі завдання
+          // та об'єкт нового завдання
+          items: [...state.tasks.items, action.payload],
+        },
+      };
+    }
+    default:
+      return state;
+  }
 };
 
 export const store = configureStore({
