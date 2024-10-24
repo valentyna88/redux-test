@@ -32,14 +32,30 @@ const rootReducer = (state = initialState, action) => {
         },
       };
     }
-    case 'tasks/deleteTask': {
+    case 'tasks/deleteTask':
       return {
         ...state,
         tasks: {
           items: state.tasks.items.filter(task => task.id !== action.payload),
         },
       };
-    }
+
+    case 'tasks/toggleCompleted':
+      return {
+        ...state,
+        tasks: {
+          items: state.tasks.items.map(task => {
+            if (task.id !== action.payload) {
+              return task;
+            }
+            return {
+              ...task,
+              completed: !task.completed,
+            };
+          }),
+        },
+      };
+
     default:
       return state;
   }
