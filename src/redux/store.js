@@ -16,7 +16,7 @@ const initialState = {
   },
 };
 
-// Відповідає лише за оновлення властивості tasks
+// Відповідає лише за оновлення властивості TASKS
 // Значенням параметра state буде об'єкт завдань
 const tasksReducer = (state = initialState.tasks, action) => {
   switch (action.type) {
@@ -51,7 +51,7 @@ const tasksReducer = (state = initialState.tasks, action) => {
   }
 };
 
-// Відповідає лише за оновлення властивості filters
+// Відповідає лише за оновлення властивості FILTERS
 // Значенням параметра state буде об'єкт фільтрів
 const filtersReducer = (state = initialState.filters, action) => {
   switch (action.type) {
@@ -65,6 +65,10 @@ const filtersReducer = (state = initialState.filters, action) => {
   }
 };
 
+// Код оголошення редюсерів слайсів
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    tasks: tasksReducer,
+    filters: filtersReducer,
+  },
 });
