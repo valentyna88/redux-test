@@ -55,29 +55,15 @@ const tasksReducer = (state = initialState.tasks, action) => {
 // Значенням параметра state буде об'єкт фільтрів
 const filtersReducer = (state = initialState.filters, action) => {
   switch (action.type) {
+    case 'filters/setStatusFilter':
+      return {
+        ...state,
+        status: action.payload,
+      };
     default:
       return state;
   }
 };
-
-// const rootReducer = (state = initialState, action) => {
-//   // Редюсер розрізняє екшени за значенням властивості type
-//   switch (action.type) {
-
-//
-//       };
-//     case 'filters/setStatusFilter':
-//       return {
-//         ...state,
-//         filters: {
-//           status: action.payload,
-//         },
-//       };
-
-//     default:
-//       return state;
-//   }
-// };
 
 export const store = configureStore({
   reducer: rootReducer,
