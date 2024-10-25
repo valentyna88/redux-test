@@ -19,7 +19,7 @@ const initialState = {
 };
 
 // Експортуємо редюсер слайса
-export default function tasksReducer(state = initialState.tasks, action) {
+export default function tasksReducer(state = initialState, action) {
   switch (action.type) {
     case 'tasks/addTask': {
       return {
