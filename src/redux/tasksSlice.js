@@ -15,9 +15,32 @@ const slice = createSlice({
   },
   // Об'єкт case-редюсерів
   reducers: {
-    addTask: (state, action) => {},
-    deleteTask: (state, action) => {},
-    toggleCompleted: (state, action) => {},
+    addTask: (state, action) => {
+      return {
+        ...state,
+        items: [...state.items, action.payload],
+      };
+    },
+    deleteTask: (state, action) => {
+      return {
+        ...state,
+        items: state.items.filter(task => task.id !== action.payload),
+      };
+    },
+    toggleCompleted: (state, action) => {
+      return {
+        ...state,
+        items: state.items.map(task => {
+          if (task.id !== action.payload) {
+            return task;
+          }
+          return {
+            ...task,
+            completed: !task.completed,
+          };
+        }),
+      };
+    },
   },
 });
 // Експортуємо фабрики екшенів
@@ -25,36 +48,3 @@ export const { addTask, deleteTask, toggleCompleted } = slice.actions;
 
 // Експортуємо редюсер слайсу
 export default slice.reducer;
-
-// export default function tasksReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case 'tasks/addTask': {
-//       return {
-//         ...state,
-//         items: [...state.items, action.payload],
-//       };
-//     }
-
-//     case 'tasks/deleteTask':
-//       return {
-//         ...state,
-//         items: state.items.filter(task => task.id !== action.payload),
-//       };
-
-//     case 'tasks/toggleCompleted':
-//       return {
-//         ...state,
-//         items: state.items.map(task => {
-//           if (task.id !== action.payload) {
-//             return task;
-//           }
-//           return {
-//             ...task,
-//             completed: !task.completed,
-//           };
-//         }),
-//       };
-//     default:
-//       return state;
-//   }
-// }
